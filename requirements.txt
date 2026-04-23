@@ -2,4 +2,4 @@ flask
 opencv-python
 numpy
 matplotlib
-jupyter
+werkzeug
