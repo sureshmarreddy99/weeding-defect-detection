@@ -2,112 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weeding Defect Detection</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            margin: 0;
-            padding: 30px;
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            background: #fff;
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-        }
-        h1 {
-            margin-top: 0;
-        }
-        form {
-            margin-bottom: 24px;
-        }
-        input[type="file"] {
-            margin: 10px 0;
-        }
-        button {
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #1d4ed8;
-        }
-        .error {
-            color: #b91c1c;
-            margin-bottom: 15px;
-        }
-        .images {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .card {
-            flex: 1;
-            min-width: 320px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 16px;
-            background: #fafafa;
-        }
-        img {
-            max-width: 100%;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
-        .summary {
-            margin-top: 20px;
-            padding: 14px;
-            background: #f9fafb;
-            border: 1px solid #e5e7eb;
-            border-radius: 10px;
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Weeding Defect Detection</h1>
-        <p>Upload an image to analyze and generate an output image.</p>
+    <h1>Weeding Defect Detection</h1>
 
-        <form method="POST" enctype="multipart/form-data">
-            <input type="file" name="image" accept="image/*" required>
-            <br>
-            <button type="submit">Upload and Analyze</button>
-        </form>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Upload and Analyze</button>
+    </form>
 
-        {% if error %}
-            <div class="error">{{ error }}</div>
-        {% endif %}
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
 
-        <div class="images">
-            {% if input_image_url %}
-            <div class="card">
-                <h3>Input Image</h3>
-                <img src="{{ input_image_url }}" alt="Input image">
-            </div>
-            {% endif %}
+    {% if input_image_url %}
+        <h2>Input Image</h2>
+        <img src="{{ input_image_url }}" width="500">
+    {% endif %}
 
-            {% if output_image_url %}
-            <div class="card">
-                <h3>Output Image</h3>
-                <img src="{{ output_image_url }}" alt="Output image">
-            </div>
-            {% endif %}
-        </div>
+    {% if output_image_url %}
+        <h2>Output Image</h2>
+        <img src="{{ output_image_url }}" width="500">
+    {% endif %}
 
-        {% if result %}
-        <div class="summary">
-            <h3>Analysis Summary</h3>
-            <p><strong>Defect count:</strong> {{ result.defect_count }}</p>
-            <p><strong>Defects:</strong> {{ result.defects }}</p>
-        </div>
-        {% endif %}
-    </div>
+    {% if result %}
+        <h2>Analysis Summary</h2>
+        <p><strong>Defect Count:</strong> {{ result.defect_count }}</p>
+        <p><strong>Defects:</strong> {{ result.defects }}</p>
+    {% endif %}
 </body>
 </html>
