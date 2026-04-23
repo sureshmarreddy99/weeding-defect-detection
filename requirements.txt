@@ -4,3 +4,4 @@ numpy
 matplotlib
 werkzeug
 scikit-learn
+gunicorn
